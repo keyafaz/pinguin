@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+} 
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Avenir Next', sans-serif;
+}
+
+textarea::-webkit-input-placeholder {
+  color: #A4A7C6;
+}
+  
+textarea:-moz-placeholder { 
+  color: #A4A7C6;
+}
+
+textarea::-moz-placeholder { 
+  color: #A4A7C6;
+}
+
+textarea:-ms-input-placeholder {
+  color: #A4A7C6;  
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  background: none;
+  color: #FBFBFB;
+  border: none;
+  font-size: 16px;
+  height: 100%;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column-reverse;
+  background-color: #363959;
+  height: calc(100vh - 200px);
+  padding: 24px;
+  overflow: scroll;
+}
+
+.textbox {
+  background-color: #3F4262;
+  height: 200px;
+  width: 100vw;
+  padding: 24px;
+  border: none;
+  color: #A4A7C6;
+}
+
+.message {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 16px;
+
+  .block {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    display: flex;
+    color: #A4A7C6;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .text {
+    color: #FBFBFB;
+    background-color: #545775;
+    display: inline;
+    padding: 16px 24px;
+    border-radius: 32px;
+    border-top-left-radius: 0;
+  }
+}
+
+.current {
+  justify-content: flex-end;
+
+  .username {
+    justify-content: flex-end;
+  }
+
+  .text {
+    border-top-left-radius: 32px;
+    border-top-right-radius: 0;
+    background-color: #00B3D0;
+  }
+}
