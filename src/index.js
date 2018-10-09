@@ -21,9 +21,9 @@ class ChatRoom extends React.Component {
   }
 
   displayMessages() {
-    return this.state.messages.map(message => {
+    return this.state.messages.map((message, index) => {
       return (
-        <div className={message.user_id === this.state.current
+        <div key={index} className={message.user_id === this.state.current
           ? 'message current'
           : 'message'}>
           <div className='message-wrapper'>
@@ -47,7 +47,8 @@ class ChatRoom extends React.Component {
   }
 
   handleKeyPress(e) {
-    if (e.charCode === 13) {
+    if (e.charCode === 13 && this.state.text.length > 0) {
+      e.preventDefault()
       const messages = [
         ...this.state.messages,
         {
@@ -73,7 +74,7 @@ class ChatRoom extends React.Component {
             value={this.state.text}
             onChange={(e) => this.handleChange(e)}
             onKeyPress={(e) => this.handleKeyPress(e)}
-            placeholder='Type a message and hit return' />
+            placeholder={`Write a message and press Enter to Send`} />
         </div>
       </div>
     )
