@@ -26,11 +26,16 @@ class ChatRoom extends React.Component {
         <div className={message.user_id === this.state.current
           ? 'message current'
           : 'message'}>
-          <div className='block'>
-            <p className='username'>{message.user_id === this.state.current
-              ? 'You'
-              : message.name}</p>
-            <div className='text'>{message.text}</div>
+          <div className='message-wrapper'>
+            <div>
+              <img src={`https://robohash.org/${message.name}`} className='thumb' />
+            </div>
+            <div className='block'>
+              <p className='username'>{message.user_id === this.state.current
+                ? 'You'
+                : message.name}</p>
+              <div className='text'>{message.text}</div>
+            </div>
           </div>
         </div>
       )
@@ -44,14 +49,14 @@ class ChatRoom extends React.Component {
   handleKeyPress(e) {
     if (e.charCode === 13) {
       const messages = [
-        ...this.state.messages, 
-        { 
-          user_id: this.state.current, 
-          name: 'Ash', 
-          text: this.state.text 
+        ...this.state.messages,
+        {
+          user_id: this.state.current,
+          name: 'Ash',
+          text: this.state.text
         }
       ]
-      this.setState({ text: '',  messages })
+      this.setState({ text: '', messages })
     }
   }
 
@@ -59,7 +64,7 @@ class ChatRoom extends React.Component {
     return (
       <div>
         <div className='chat'>
-          <div>
+          <div className='chat-wrapper'>
             {this.displayMessages()}
           </div>
         </div>
