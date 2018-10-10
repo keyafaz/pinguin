@@ -1,29 +1,43 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/index.scss'
+import io from 'socket.io-client'
 
 class ChatRoom extends React.Component {
   constructor() {
     super()
     this.state = {
-      current: 1,
+      current: window.location.hash.slice(1) || 'Ash',
       text: '',
       messages: [
-        { user_id: 1, name: 'Ash', text: `yeah thought about that` },
-        { user_id: 1, name: 'Ash', text: `but I'd rather just go to the store` },
-        { user_id: 2, name: 'Keya', text: `yooo Wu Wei Din tho.` },
-        { user_id: 1, name: 'Ash', text: `let's go get it this weekend` },
-        { user_id: 2, name: 'Keya', text: `pork chops and fried rice..mmm` },
-        { user_id: 1, name: 'Ash', text: `need to save money tho. shieeeet` },
-        { user_id: 2, name: 'Keya', text: `payday this friday for me, suckx for u` },
+        // { name: 'Ash', text: `yeah thought about that` },
+        // { name: 'Ash', text: `but I'd rather just go to the store` },
+        // { name: 'Keya', text: `yooo Wu Wei Din tho.` },
+        // { name: 'Ash', text: `let's go get it this weekend` },
+        // { name: 'Keya', text: `pork chops and fried rice..mmm` },
+        // { name: 'Ash', text: `need to save money tho. shieeeet` },
+        // { name: 'Keya', text: `payday this friday for me, suckx for u` },
       ]
     }
+  }
+
+  componentDidMount() {
+    this.socket = io('http://localhost:8080')
+    this.socket.on('chat message', (message) => this.pushMessage(message))
+  }
+
+  pushMessage(message) {
+    if(message.name !== this.state.current) this.setState({ messages: [...this.state.messages, message] })
+  }
+
+  componentWillUnmount() {
+    this.socket.close()
   }
 
   displayMessages() {
     return this.state.messages.map((message, index) => {
       return (
-        <div key={index} className={message.user_id === this.state.current
+        <div key={index} className={message.name === this.state.current
           ? 'message current'
           : 'message'}>
           <div className='message-wrapper'>
@@ -31,7 +45,7 @@ class ChatRoom extends React.Component {
               <img src={`https://robohash.org/${message.name}`} className='thumb' />
             </div>
             <div className='block'>
-              <p className='username'>{message.user_id === this.state.current
+              <p className='username'>{message.name === this.state.current
                 ? 'You'
                 : message.name}</p>
               <div className='text'>{message.text}</div>
@@ -49,14 +63,16 @@ class ChatRoom extends React.Component {
   handleKeyPress(e) {
     if (e.charCode === 13 && this.state.text.length > 0) {
       e.preventDefault()
-      const messages = [
-        ...this.state.messages,
-        {
-          user_id: this.state.current,
-          name: 'Ash',
-          text: this.state.text
-        }
-      ]
+
+      const message = {
+        name: this.state.current,
+        text: this.state.text
+      }
+
+      const messages = [...this.state.messages, message]
+
+      this.socket.emit('chat message', message)
+
       this.setState({ text: '', messages })
     }
   }

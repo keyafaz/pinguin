@@ -30,6 +30,7 @@ textarea:focus, input:focus{
 }
 
 textarea {
+  font-family: 'Avenir Next', sans-serif;
   resize: none;
   width: 100%;
   background: none;
@@ -91,6 +92,7 @@ textarea {
   }
 
   .text {
+    max-width: 60vw;
     color: #FBFBFB;
     background-color: #545775;
     display: inline;
