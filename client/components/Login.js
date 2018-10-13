@@ -17,9 +17,9 @@ export default class Login extends React.Component {
   createAccount() {
     return (
       <div className='center column'>
-        <input name='name' className='input' type='text' value='' placeholder='Name' style={{ width: '30vw' }} />
-        <input name='password' className='input' type='password' value='' placeholder='Password' style={{ width: '30vw' }} />
-        <button className='button' style={{ width: '30vw' }}>Create an account</button>
+        <input name='name' className='input' type='text' value='' placeholder='Name' style={{ width: 500 }} />
+        <input name='password' className='input' type='password' value='' placeholder='Password' style={{ width: 500 }} />
+        <button className='button' style={{ width: 500 }}>Create an account</button>
         <p style={{ color: 'white', cursor: 'pointer' }} onClick={() => this.setState({ isNewUser: false })}>Login to your account</p>
       </div>
     )
@@ -28,10 +28,10 @@ export default class Login extends React.Component {
   signIn() {
     return (
       <div className='center column'>
-        <input name='name' className='input' type='text' value='' placeholder='Name' style={{ width: '30vw' }} />
-        <input name='password' className='input' type='password' value='' placeholder='Password' style={{ width: '30vw' }} />
-        <input name='verify-password' className='input' type='password' value='' placeholder='Verify password' style={{ width: '30vw' }} />
-        <button className='button' style={{ width: '30vw' }}>Login</button>
+        <input name='name' className='input' type='text' value='' placeholder='Name' style={{ width: 500 }} />
+        <input name='password' className='input' type='password' value='' placeholder='Password' style={{ width: 500 }} />
+        <input name='verify-password' className='input' type='password' value='' placeholder='Verify password' style={{ width: 500 }} />
+        <button className='button' style={{ width: 500 }}>Login</button>
         <p style={{ color: 'white', cursor: 'pointer' }} onClick={() => this.setState({ isNewUser: true })}>Create an account</p>
       </div>
     )
