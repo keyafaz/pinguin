@@ -1,22 +1,22 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import './styles/index.scss'
+import '../styles/index.scss'
 import io from 'socket.io-client'
+import Message from './Message'
 
-class ChatRoom extends React.Component {
+export default class ChatRoom extends React.Component {
   constructor() {
     super()
     this.state = {
       current: window.location.hash.slice(1) || 'Ash',
       text: '',
       messages: [
-        // { name: 'Ash', text: `yeah thought about that` },
-        // { name: 'Ash', text: `but I'd rather just go to the store` },
-        // { name: 'Keya', text: `yooo Wu Wei Din tho.` },
-        // { name: 'Ash', text: `let's go get it this weekend` },
-        // { name: 'Keya', text: `pork chops and fried rice..mmm` },
-        // { name: 'Ash', text: `need to save money tho. shieeeet` },
-        // { name: 'Keya', text: `payday this friday for me, suckx for u` },
+        { name: 'Ash', text: `yeah thought about that` },
+        { name: 'Ash', text: `but I'd rather just go to the store` },
+        { name: 'Keya', text: `yooo Wu Wei Din tho.` },
+        { name: 'Ash', text: `let's go get it this weekend` },
+        { name: 'Keya', text: `pork chops and fried rice..mmm` },
+        { name: 'Ash', text: `need to save money tho. shieeeet` },
+        { name: 'Keya', text: `payday this friday for me, suckx for u` },
       ]
     }
   }
@@ -35,25 +35,12 @@ class ChatRoom extends React.Component {
   }
 
   displayMessages() {
-    return this.state.messages.map((message, index) => {
-      return (
-        <div key={index} className={message.name === this.state.current
-          ? 'message current'
-          : 'message'}>
-          <div className='message-wrapper'>
-            <div>
-              <img src={`https://robohash.org/${message.name}`} className='thumb' />
-            </div>
-            <div className='block'>
-              <p className='username'>{message.name === this.state.current
-                ? 'You'
-                : message.name}</p>
-              <div className='text'>{message.text}</div>
-            </div>
-          </div>
-        </div>
-      )
-    })
+    return this.state.messages.map((message, index) => (
+      <Message 
+        key={index} 
+        isCurrentUser={message.name === this.state.current} 
+        message={message} />
+    ))
   }
 
   handleChange({ target: { value } }) {
@@ -96,5 +83,3 @@ class ChatRoom extends React.Component {
     )
   }
 }
-
-ReactDOM.render(<ChatRoom />, document.getElementById('app'))

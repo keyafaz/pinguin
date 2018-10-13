@@ -7,6 +7,44 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: 'Avenir Next', sans-serif;
+  background-color: #2B2D4A;
+}
+
+input, button {
+  font-family: 'Avenir Next', sans-serif;
+  font-weight: 600;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.input {
+  height: 50px;
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  border: none;
+}
+
+.button {
+  height: 50px;
+  padding: 16px;
+  background-color: #51AA66;
+  border: none;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
 }
 
 textarea::-webkit-input-placeholder {
