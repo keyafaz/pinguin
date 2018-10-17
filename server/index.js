@@ -2,12 +2,21 @@ var express = require('express')
 var app = express()
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
+const request = require('request')
 
 app.use(express.static(__dirname + '/dist'))
 
 app.get('/', function (req, res) {
   res.sendFile('./index.html')
 })
+
+app.post('/api/users', function (req, res) {
+  console.log("POST DATA", req.body);
+  // This is where we would add the user to the database
+  // Then redirect to the root route
+  res.redirect('/ChatRoom.js');
+})
+
 
 io.on('connection', function (socket) {
   console.log('a user connected')
